@@ -98,14 +98,14 @@ const previsao = cidade?.daily || []
           </div>
 
           <div className="previsao">
-  <h2>Previsão para os próximos dias</h2>
+          <h2>Previsão para os próximos dias</h2>
 
-  <div className="previsao-container">
+           <div className="previsao-container">
 
-    {previsao.map((dia, index) => {
+            {previsao.map((dia, index) => {
 
-      const climaDia = codigosWmo.find(
-        item => item.codigo === dia.weather_code
+            const climaDia = codigosWmo.find(
+            item => item.codigo === dia.weather_code
       )
 
       return (
