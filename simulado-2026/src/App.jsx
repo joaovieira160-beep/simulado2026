@@ -40,14 +40,57 @@ function App() {
       {cidade && (
 
         <div className='resultados'>
-          <h2>{cidade.name}</h2>
-          <p>Temperatura: {cidade.current.temperature_2m} °C</p>
-          <p>Sensaçao: {cidade.current.apparent_temperature} °C/h</p>
-          <p>Vento: {cidade.current.wind_speed_10m} km/h</p>
-          <p>Umidade: {cidade.current.relative_humidity_2m}%</p>
+          <h2 >{cidade.name}</h2>
           
           
+          <div className="resultados-1">
+
+            
+          <div className="textos-temperatura">
+            <p className='temperatura'>temperatura</p>
+          <img src="../src/components/images/termometro.svg" alt="termometro" />
+          <p>{cidade.current.temperature_2m} °C</p>
+          </div>
           
+          
+          <div className="textos-sesacao">
+            <p className="sensacao">Sensação</p>
+            <img src="../src/components/images/termometro.svg" alt="termometro" />
+          <p>{cidade.current.apparent_temperature} °C</p>
+          </div>
+         
+        
+         <div className="textos-vento">
+           <p className="vento">Vento</p>
+          <img src="../src/components/images/vento.svg" alt="img-vento" />
+          <p>{cidade.current.wind_speed_10m} km/h</p>
+         </div>
+
+         
+         <div className="textos-umidade">
+          <p className="umidade">Umidade</p>
+          <img src="../src/components/images/umidade.svg" alt="img-umidade" />
+          <p>{cidade.current.relative_humidity_2m}%</p>
+         </div>
+
+         <div className="texto-precipitacao">
+          <p className="precipitacao">Precipitação</p>
+          <img src="../src/components/images/uv.svg" alt="img-umidade" />
+          <p>{cidade.current.uv_index}</p>
+         </div>
+          
+          <div className="texto-precipitacao">
+          <p className="precipitacao">Precipitação</p>
+          <img src="../src/components/images/uv.svg" alt="img-umidade" />
+          <p>{cidade.current.weather_code}</p>
+         </div>
+
+
+          
+          </div>
+          
+          
+           
         </div>
       )}
     </div>
