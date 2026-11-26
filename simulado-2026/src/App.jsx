@@ -7,6 +7,7 @@ import './App.css'
 function App() {
   const [busca, setBusca] = useState('')
   const [cidade, setCidade] = useState(null)
+  const [wmo, setWmo] = useState(null)
 
   function buscar() {
     const resultado = dadosClima.find(
@@ -14,7 +15,17 @@ function App() {
     )
 
     setCidade(resultado)
+
+    if(resultado){
+      setWmo(resultado.current.weather_code)
+    }
   }
+
+const clima = codigosWmo.find(
+   item => item.codigo === wmo
+)
+
+const previsao = cidade?.daily || []
 
   return (
     <div className='app'>
@@ -39,8 +50,10 @@ function App() {
       
       {cidade && (
 
-        <div className='resultados'>
+        <div className='resultados'>  
           <h2 >{cidade.name}</h2>
+          <h3>{clima.descricao}</h3>
+          <h3>{clima.icone}</h3>
           
           
           <div className="resultados-1">
@@ -79,15 +92,56 @@ function App() {
           <p>{cidade.current.uv_index}</p>
          </div>
           
-          <div className="texto-precipitacao">
-          <p className="precipitacao">Precipitação</p>
-          <img src="../src/components/images/uv.svg" alt="img-umidade" />
-          <p>{cidade.current.weather_code}</p>
-         </div>
+         
 
 
-          
           </div>
+
+          <div className="previsao">
+  <h2>Previsão para os próximos dias</h2>
+
+  <div className="previsao-container">
+
+    {previsao.map((dia, index) => {
+
+      const climaDia = codigosWmo.find(
+        item => item.codigo === dia.weather_code
+      )
+
+      return (
+        <div className="card-previsao" key={dia.date}>
+
+          <h3>
+            {index === 0 ? 'Hoje' : new Date(
+              dia.date + 'T12:00:00'
+            ).toLocaleDateString('pt-BR', {
+              weekday: 'short',
+              day: '2-digit',
+              month: '2-digit'
+            })}
+          </h3>
+
+          <p className="icone-previsao">
+            {climaDia?.icone}
+          </p>
+
+          <p>{climaDia?.descricao}</p>
+
+          <div className="temperaturas-previsao">
+            <span>Máx: {dia.temperature_2m_max}°C</span>
+            <span>Min: {dia.temperature_2m_min}°C</span>
+          </div>
+
+          <p>
+            Chuva: {dia.precipitation_probability_max}%
+          </p>
+
+        </div>
+      )
+    })}
+
+  </div>
+</div>
           
           
            
